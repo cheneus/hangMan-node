@@ -5,8 +5,7 @@ const inquirer = require("inquirer");
 
 const command = process.argv[2];
 const cmdVal = process.argv[3];
-
-var lives = 10;
+var lives = 0
 var words = ["wolf", "hyena", "tiger", "lion", "puma", "fox"]
 // var letter, letters, currentWord
 
@@ -34,12 +33,11 @@ var checkLetter = (letter) => {
   }
 }
 var start = () => {
+  lives = 10;
   currentWord = (words[Math.floor(Math.random() * words.length)]).toUpperCase();
-
+  console.log(`IT IS ALWAYS WILD DOG/CAT`)
   word = currentWord.split('');
   letters = word.map(x => '_')
-  console.log(letters)
-  console.log(word)
   hang(letters)
 }
 
@@ -66,7 +64,8 @@ var guess = (letter) => {
 
   if (!checkLetter(letter)) {
     if (lives === 0) {
-      console.log(`lose; you have ${lives}`)
+      console.log(`lose; you have ${lives} lives`)
+      playAgain();
     }
     else {
       hang()
@@ -80,5 +79,18 @@ var guess = (letter) => {
   }
 }
 
+var playAgain = () => {
+   inquirer.prompt([{
+      name: "play",
+      // message: "Your letter of choice?" + '\n' + "test",
+      message: `Play Again??`,
+      type: "confirm",
+      default: true
+    }])
+    .then(function(answers) {
+   (answers.play) ? start() : "GoodBye!"
+      // console.log(message)
+    });
+}
 
 start()
