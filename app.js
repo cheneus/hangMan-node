@@ -26,7 +26,8 @@ var checkLetter = (letter) => {
   if (!guessed) {
     // console.log(`wrong`)
     lives -= 1;
-    console.log(lives)
+    console.log(`-----------------------\nWRONG!!\n------------------------`)
+    console.log(`You have ${lives} left!!`)
     return false
   } else {
     return true
@@ -47,7 +48,7 @@ var hang = () => {
   inquirer.prompt([{
       name: "letter",
       // message: "Your letter of choice?" + '\n' + "test",
-      message: `${letterPl}\n*********************\n Your letter of choice?`,
+      message: `${letterPl}\n-------------------------------\n Your letter of choice?`,
       validate: validateLetter
     }])
     .then(function(answers) {
